@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+message PutRequest {
+    bytes data = 1;
+}
+
+message GetResponse {
+    bytes data = 1;
+}
+
+message PutResponse {
+    bool status = 1;
+}
+
+service Cell {
+    rpc Get (google.protobuf.Empty) returns (GetResponse) {}
+    rpc Put (PutRequest) returns (PutResponse) {}
+    rpc GetAll (google.protobuf.Empty) returns (stream GetResponse) {}
+}
